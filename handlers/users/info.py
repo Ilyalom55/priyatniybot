@@ -2,7 +2,7 @@ import logging
 
 from aiogram.dispatcher.filters import Command
 from aiogram.types import Message, CallbackQuery, InlineKeyboardMarkup, InlineKeyboardButton
-
+from db.repository import SqlAlchemyAsyncRepository
 
 from keyboards.inline.choice_buttons import info, info_keyboard, less_info, no_info, all_categories, go_to_videos
 
@@ -12,12 +12,14 @@ from loader import dp, bot
 @dp.message_handler(Command("start"))
 async def cmd_start(message: Message):
     await message.answer(text="Привет, мой приятный друг! Нажми, что хочешь сделать.", reply_markup=info)
+    rep = SqlAlchemyAsyncRepository()
+    await rep.add_user('Awa', 'awaw')
 
 
 @dp.callback_query_handler(lambda c: c.data == 'about_me')
 async def showing_info(call: CallbackQuery):
     await call.answer()
-    await call.message.answer("Мне приятно, что ты хочешь узнать обо мне побольше. Что тебя интересует?",
+    await call.message.answer(f"Мне приятно, что ты хочешь узнать обо мне побольше. Что тебя интересует?",
                               reply_markup=info_keyboard)
 
 
@@ -26,6 +28,7 @@ async def process_callback_button3(callback_query: CallbackQuery):
     await bot.answer_callback_query(callback_query.id)
     await bot.send_sticker(callback_query.from_user.id, sticker='CAACAgIAAxkBAAEKwrNlVdSmXm4DgI1-RHFpfiQlXps7EQACjRgAAo3xMEjCF6lG7snpVTME')
     await bot.send_message(callback_query.from_user.id, "Принимай мой новый стикерпак и возвращайся!", reply_markup=do_back())
+
 
 def do_back():
     back_button = InlineKeyboardMarkup().add(InlineKeyboardButton("Вернуться", callback_data="back"))
