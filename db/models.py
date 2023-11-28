@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String, DateTime, Float, Time, Text, ForeignKey
 from sqlalchemy.orm import relationship
-from .database import Base, engine
+from .database import Base
 
 
 class UserFeedback(Base):
@@ -16,7 +16,7 @@ class Users(Base):
     id = Column(Integer, primary_key=True)
     telegram_id = Column(String)
     username = Column(String)
-    feedback = relationship('UserFeedback', backref='user')
+    feedback = relationship('UserFeedback', backref='user', lazy="selectin")
 
 
 class UserWatched(Base):
@@ -38,7 +38,7 @@ class Videos(Base):
     popularity_rating = Column(Float)
     video_duration = Column(Time)
     video_post_date = Column(DateTime)
-    tags = relationship('Tags', secondary='videos_tags', backref='videos')
+    tags = relationship('Tags', secondary='videos_tags', backref='videos', lazy="selectin")
 
 
 class VideosTags(Base):
@@ -53,8 +53,4 @@ class Tags(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String)
     description = Column(Text)
-
-
-async def async_create_all():  # TODO: Нужно запустить в начале бота
-    async with engine.begin() as conn:
-        await conn.run_sync(Base.metadata.create_all)
+    playlist_url = Column(String)

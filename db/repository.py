@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from .database import engine, async_session
 from .models import *
+from sqlalchemy import select
 
 
 class AbstractAsyncRepository(ABC):
@@ -18,6 +19,10 @@ class AbstractAsyncRepository(ABC):
 
     @abstractmethod
     async def add_user_feedback(self, user_id, feedback_text, data_submitted):
+        pass
+
+    @abstractmethod
+    async def get_tags(self):
         pass
 
 
@@ -56,3 +61,9 @@ class SqlAlchemyAsyncRepository(AbstractAsyncRepository):
             async with session.begin():
                 feedback = UserFeedback(user_id=user_id, feedback_text=feedback_text, data_submitted=data_submitted)
                 session.add(feedback)
+
+    async def get_tags(self):
+        async with self.Session(engine) as session:
+            result = await session.execute(select(Tags.name, Tags.playlist_url))
+            tags = {row[0]: row[1] for row in result}
+            return tags
