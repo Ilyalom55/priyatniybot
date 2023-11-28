@@ -46,7 +46,9 @@ fresh_video = InlineKeyboardButton(text="Покажи свежак",url="https:/
 go_to_videos.insert(fresh_video)
 
 all_categories = InlineKeyboardMarkup(row_width=1)
-men_women = InlineKeyboardButton(text="Мужское/Женское",url="https://www.youtube.com/playlist?list=PL7-a4pKt1YOnWdt5SbY0T-BeXfcWXbini")
+#men_women = InlineKeyboardButton(text="Мужское/Женское",url="https://www.youtube.com/playlist?list=PL7-a4pKt1YOnWdt5SbY0T-BeXfcWXbini")
+#all_categories.insert(men_women)
+men_women = InlineKeyboardButton(text="Мужское/Женское",callback_data="men_women")
 all_categories.insert(men_women)
 pregnant_16 = InlineKeyboardButton(text="Беременна в 16", url="https://www.youtube.com/playlist?list=PL7-a4pKt1YOnXk0o6bV1Hco_Qz_mtnDF5")
 all_categories.insert(pregnant_16)
@@ -59,3 +61,6 @@ all_categories.insert(pacanki)
 betray = InlineKeyboardButton(text="Измены", url="https://www.youtube.com/playlist?list=PL7-a4pKt1YOl1nv9qgyWsiIboxLr7KgUm")
 all_categories.insert(betray)
 
+eat = InlineKeyboardMarkup(row_width=1)
+choice = InlineKeyboardButton(text="Подбери мне закусочку!", callback_data="eat_choice")
+eat.insert(choice)
