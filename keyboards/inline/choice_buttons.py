@@ -48,6 +48,8 @@ background_video = InlineKeyboardButton(text="Послушать на фон🔈
 go_to_videos.insert(background_video)
 fresh_video = InlineKeyboardButton(text="Покажи свежак🆕",url="https://youtu.be/gASBs8pRtLU?si=jKcHsgOmGvFqUt-q")
 go_to_videos.insert(fresh_video)
+back = InlineKeyboardButton(text="Назад🔙", callback_data="back_to_info")
+go_to_videos.insert(back)
 
 all_categories = InlineKeyboardMarkup(row_width=1)
 #men_women = InlineKeyboardButton(text="Мужское/Женское",url="https://www.youtube.com/playlist?list=PL7-a4pKt1YOnWdt5SbY0T-BeXfcWXbini")
@@ -72,8 +74,19 @@ all_categories.insert(back)
 eat = InlineKeyboardMarkup(row_width=1)
 back_2 = InlineKeyboardButton(text="Назад🔙", callback_data="back_2")
 eat.insert(back_2)
+more = InlineKeyboardButton(text="Другое видео", callback_data="more")
+eat.insert(more)
 choice = InlineKeyboardButton(text="Подбери мне закусочку!", callback_data="eat_choice")
 eat.insert(choice)
+
+
+after_pregnant_16 = InlineKeyboardMarkup(row_width=1)
+back_2 = InlineKeyboardButton(text="Назад🔙", callback_data="back_2")
+after_pregnant_16.insert(back_2)
+more_2 = InlineKeyboardButton(text="Другое видео", callback_data="more_2")
+after_pregnant_16.insert(more_2)
+choice = InlineKeyboardButton(text="Подбери мне закусочку!", callback_data="eat_choice")
+after_pregnant_16.insert(choice)
 
 
 end = InlineKeyboardMarkup(row_width=1)
