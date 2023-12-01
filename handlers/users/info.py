@@ -8,6 +8,10 @@ from keyboards.inline.choice_buttons import info, info_keyboard, all_categories,
 from handlers.users.videos_links import men_women, pregnant_16
 from loader import dp, bot
 
+from aiogram.contrib.fsm_storage.memory import MemoryStorage
+from aiogram.dispatcher import FSMContext
+from aiogram.dispatcher.filters.state import StatesGroup, State
+
 
 @dp.message_handler(Command("start"))
 async def cmd_start(message: Message):
@@ -171,3 +175,16 @@ async def more2(call:CallbackQuery):
     else:
         await bot.send_animation(call.from_user.id, r'https://media.tenor.com/oDOxbExCNqQAAAAC/скажучестно-i-will-be-honest.gif',caption="Сорри, но это все, чем я располагаю по выбранной категории😶‍🌫️",
                                reply_markup=end)
+
+@dp.callback_query_handler(lambda c: c.data == 'prediction')
+async def send_prediction(callback_query: CallbackQuery):
+    predictions = ["Красивый, умный и любящий человек войдет в вашу жизнь.", "Ваша жизнь будет счастливой и мирной.", "Хорошие вещи придут к вам."]
+    prediction = random.choice(predictions)
+    await bot.send_message(callback_query.from_user.id, prediction, reply_markup=do_back())
+def do_back():
+    back_button = InlineKeyboardMarkup().add(InlineKeyboardButton("Вернуться🔙", callback_data="back"))
+    return back_button
+
+
+
+

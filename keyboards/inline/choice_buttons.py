@@ -9,6 +9,8 @@ show_video = InlineKeyboardButton(text="Покажи видео", callback_data=
 info.insert(show_video)
 show_stickers = InlineKeyboardButton(text="Хочу стикеры", callback_data="sticker")
 info.insert(show_stickers)
+take_prediction = InlineKeyboardButton(text="Открыть печеньку с предсказанием", callback_data="prediction")
+info.insert(take_prediction)
 
 
 info_keyboard = InlineKeyboardMarkup(row_width=1)

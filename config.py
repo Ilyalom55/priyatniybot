@@ -1,1 +1,1 @@
-BOT_TOKEN = 'Не пали токен'
+BOT_TOKEN = '5815132521:AAGy-4v93dDat44Dzm-afE7O_oQrqO8Tchc'
