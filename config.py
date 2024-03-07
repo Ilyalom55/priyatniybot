@@ -1,1 +1,1 @@
-BOT_TOKEN = 'Не пали токен'
+BOT_TOKEN = ''
